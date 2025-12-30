@@ -1,10 +1,31 @@
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
+import type { Property, PropertyFormData, ApiResponse } from '../types';
 const API = axios.create({
     baseURL: 'http://localhost:5000/api',
 });
 
-export const createProperty = async (data:any):Promise<AxiosResponse<any>> => { return API.post('/properties',data); };
-export const getProperties = async ():Promise<AxiosResponse<any>> =>{ return API.get('/properties') };
-export const getProperty =async (id:string):Promise<AxiosResponse<any>> =>{ return API.get(`/properties/${id}`)};
-export const analyzeProperty = async (id:string):Promise<AxiosResponse<any>> =>{ return API.post(`/properties/${id}/analyze`)};
+type ApiPromise<T> = Promise<AxiosResponse<ApiResponse<T>>>;
+export const createProperty = (data: PropertyFormData): ApiPromise<Property> => {
+  return API.post('/properties', data);
+};
+
+export const getProperties = (): ApiPromise<Property[]> => {
+  return API.get('/properties');
+};
+
+export const getProperty = (id: string): ApiPromise<Property> => {
+  return API.get(`/properties/${id}`);
+};
+
+export const analyzeProperty = (id: string): ApiPromise<Property> => {
+  return API.post(`/properties/${id}/analyze`);
+};
+
+export const deleteProperty = (id: string): ApiPromise<void> => {
+  return API.delete(`/properties/${id}`);
+};
+
+export const updateProperty = (id: string, data: Partial<PropertyFormData>): ApiPromise<Property> => {
+  return API.put(`/properties/${id}`, data);
+};

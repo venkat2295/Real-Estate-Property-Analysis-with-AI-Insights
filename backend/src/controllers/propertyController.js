@@ -57,3 +57,39 @@ exports.runAIAnalysis = async (req, res,next) => {
    next(err);
   }
 };
+
+exports.deleteProperty = async (req, res, next) => {
+    try {
+        const property = await propertyService.deletePropertyById(req.params.id);
+        if (!property) {
+            return res.status(404).json({
+                success: false,
+                message: 'Property not found'
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            data: {}
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.updateProperty = async (req, res, next) => {
+    try {
+        const property = await propertyService.updatePropertyById(req.params.id, req.body);
+        if (!property) {
+            return res.status(404).json({
+                success: false,
+                message: 'Property not found'
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            data: property
+        });
+    } catch (err) {
+        next(err);
+    }
+};
