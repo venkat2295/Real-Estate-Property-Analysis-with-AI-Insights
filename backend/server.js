@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 5000;
 dotenv.config();
 connectDB();
 app.use(cors({
-  "http://localhost:5173",
+  origin: ["http://localhost:5173", process.env.FRONTEND_URL],
+  credentials: true
 }));
 app.use(express.json());
 app.use('/api/properties', require('./src/routes/propertyRoutes'));
