@@ -18,7 +18,7 @@ const summary = property.aiAnalysis?.summary;
         )}
       </div>
       <p className="text-sm text-gray-700 leading-relaxed mb-6">
-        {property.aiAnalysis?.summary ||
+        {summary ||
           'Run AI analysis to see insights about this property.'}
       </p>
 

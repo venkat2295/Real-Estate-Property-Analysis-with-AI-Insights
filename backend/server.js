@@ -7,7 +7,10 @@ const PORT = process.env.PORT || 5000;
 
 dotenv.config();
 connectDB();
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", process.env.FRONTEND_URL],
+  credentials: true
+}));
 app.use(express.json());
 app.use('/api/properties', require('./src/routes/propertyRoutes'));
 const errorHandler = require('./src/middleware/errorMiddleware');
@@ -18,8 +21,11 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = app;
 
