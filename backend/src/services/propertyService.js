@@ -23,3 +23,14 @@ exports.getAllProperties = async()=>{
 exports.getPropertyById = async(id)=>{
     return await Property.findById(id);
 };
+
+exports.deletePropertyById = async(id)=>{
+    return await Property.findByIdAndDelete(id);
+};
+
+exports.updatePropertyById = async(id,data)=>{
+    return await Property.findByIdAndUpdate(id,data,{
+        new:true,
+        runValidators:true
+    });
+};
