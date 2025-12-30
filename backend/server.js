@@ -7,7 +7,9 @@ const PORT = process.env.PORT || 5000;
 
 dotenv.config();
 connectDB();
-app.use(cors());
+app.use(cors({
+  "http://localhost:5173",
+}));
 app.use(express.json());
 app.use('/api/properties', require('./src/routes/propertyRoutes'));
 const errorHandler = require('./src/middleware/errorMiddleware');

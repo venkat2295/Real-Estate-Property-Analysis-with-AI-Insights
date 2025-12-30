@@ -65,7 +65,7 @@ const formatCurrencyAxis = (value: number) => {
                 [`₹${value?.toLocaleString() ?? '0'}`,'Price']
               }
               />
-            <Bar dataKey="value" radius={[6, 6, 0, 0]}> {data.map((entry,index)=>(
+            <Bar dataKey="value" radius={[6, 6, 0, 0]}> {data.map((_,index)=>(
               <Cell key ={`cell-${index}`} fill={index ==0?'#94a3b8':'#4f46e5'}
               />
             ))}
